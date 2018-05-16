@@ -1,0 +1,136 @@
+doctype html
+html
+    head
+        title="赛事信息管理"
+        link(rel='stylesheet', href='/stylesheets/info_manager.css')
+        script(type="text/javascript").
+            window.onload = function () {
+                var gameData = !{gameData};
+                gameData.forEach(function (t, index) {
+                    var container = document.getElementById('item_container');
+                    var item = document.createElement("div");
+                    item.setAttribute("class", "item");
+                    container.appendChild(item);
+                    var num = document.createElement("div");
+                    num.setAttribute("id", "table");
+                    num.innerHTML = 'NO' + (index + 1);
+                    item.appendChild(num);
+
+                    var level = document.createElement("input");
+                    level.setAttribute("id", "level")
+                    level.value = t[0];
+                    item.appendChild(level);
+
+                    var currency = document.createElement("input");
+                    currency.setAttribute("id", "currency")
+                    currency.value = t[1];
+                    item.appendChild(currency);
+
+                    var person = document.createElement("input");
+                    person.setAttribute("id", "person");
+                    person.setAttribute("placeholder", "请用\"&\"分割");
+                    var persons = t[2];
+                    var personStr = '';
+                    persons.forEach(function (str, j) {
+                        if (j === 0) {
+                            personStr = str;
+                        } else {
+                            personStr = personStr + "&" + str;
+                        }
+                    })
+                    person.value = personStr;
+                    item.appendChild(person);
+
+                    var deleteBtn = document.createElement("button");
+                    deleteBtn.setAttribute("id", "delete");
+                    deleteBtn.onclick = function () {
+                        deleteSelf(this);
+                    };
+                    deleteBtn.innerHTML = "删除"
+                    item.appendChild(deleteBtn);
+                })
+            }
+            function add() {
+                var main = document.getElementById("item_container");
+                var itemCount = main.childElementCount;
+                var item = document.createElement("div");
+                item.setAttribute("class", "item");
+                main.appendChild(item);
+                var div = document.createElement("div");
+                div.setAttribute("id", "table")
+                div.innerHTML = "NO" + (itemCount + 1);
+                item.appendChild(div);
+                var level = document.createElement("input");
+                level.setAttribute("id", "level")
+                item.appendChild(level);
+                var currency = document.createElement("input");
+                currency.setAttribute("id", "currency")
+                item.appendChild(currency);
+                var person = document.createElement("input");
+                person.setAttribute("id", "person");
+                person.setAttribute("placeholder", "请用\"&\"分割");
+                item.appendChild(person);
+                var deleteBtn = document.createElement("button");
+                deleteBtn.setAttribute("id", "delete");
+                deleteBtn.onclick = function () {
+                    deleteSelf(this);
+                };
+                deleteBtn.innerHTML = "删除"
+                item.appendChild(deleteBtn);
+            }
+            function deleteSelf(dom) {
+                var parent = dom.parentNode;
+                parent.parentNode.removeChild(parent);
+            }
+            function commit() {
+                var main = document.getElementById("item_container");
+                var itemCount = main.childElementCount;
+                var data = new Array(itemCount);
+                for (var i = 0; i < itemCount; i++) {
+                    var item = main.getElementsByClassName("item")[i];
+                    var level = item.getElementsByTagName("input")[0];
+                    var currency = item.getElementsByTagName("input")[1];
+                    var person = item.getElementsByTagName("input")[2];
+                    var table = new Array(3);
+                    table[0] = level.value;
+                    table[1] = currency.value;
+                    var persons = person.value;
+                    if (persons.indexOf("&")) {
+                        var personData = persons.split("&");
+                    } else {
+                        var personData = [persons]
+                    }
+                    table[2] = personData;
+                    data[i] = table;
+                }
+                console.log(JSON.stringify(data));
+                sendData(JSON.stringify(data));
+            }
+            function sendData(data) {
+                var oAjax = null;
+                try {
+                    oAjax = new XMLHttpRequest();
+                } catch (e) {
+                    oAjax = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                oAjax.open("get", 'http://localhost:3000/gameinfo/dataupdate?data=' + data, true);
+                oAjax.send();
+                oAjax.onreadystatechange = function () {
+                    if (oAjax.readyState === 4) {
+                        alert('提交成功');
+                    }
+                };
+            }
+    body
+        div(id="main_container")
+            div(id="item_container")
+                //div(class="item")
+                //    div(id="table") NO1
+                //    input(id="level")
+                //    input(id="currency")
+                //    input(id="person" placeholder='请用\"&\"分割')
+                //    button(id="delete" onclick='deleteSelf(this)') 删除
+            div(class="add")
+                button(id="add_button" onclick='add()') 添加一桌
+            div(class="add")
+                button(id="commit_button" onclick='commit()') 提交数据

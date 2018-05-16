@@ -1,0 +1,45 @@
+#main_layout {
+    border: 1px solid #ffffff;
+    background-color: red;
+    width: 100%;
+}
+
+#title_txt {
+    font-size: 30pt;
+    color: white;
+    text-align: center;
+}
+
+#title_layout {
+    text-align: center;
+    padding: 10px;
+    height: 10%;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+}
+
+#data_layout {
+    display: flex;
+    height: 90%;
+    justify-content: flex-start;
+}
+
+#table_number {
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 12pt;
+    text-align: center;
+    height: 5%;
+    vertical-align: middle;
+}
+
+#name {
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 12pt;
+    text-align: center;
+    padding-top: 3pt;
+    height: 85%;
+}
