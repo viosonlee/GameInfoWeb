@@ -6,28 +6,44 @@ html
         script(type='text/javascript').
             window.onload = function () {
                 var main_layout = document.getElementById('main_layout');
-                main_layout.style.height = document.documentElement.clientHeight - 15 + 'px';
+                var totalHeight = document.documentElement.clientHeight - 15;
+                main_layout.style.height = totalHeight + 'px';
+                var titleLayout = document.getElementById('title_layout');
+                titleLayout.style.paddingTop = (totalHeight * 0.1 - 50) / 2 + 'px';
+                titleLayout.style.paddingBottom = (totalHeight * 0.1 - 50) / 2 + 'px';
                 var dataLayout = document.getElementById("data_layout");
+
                 var gameData = !{gameData}
                 gameData.forEach(function (obj, index) {
                     var pre = 100 / (gameData.length + 1);
+                    var padding = (totalHeight * 0.05 * 0.9 - 18) / 2 + 'px';
                     if (index === 0) {
                         var divLeftLayout = document.createElement("div");//左边的几个框框
                         divLeftLayout.style.width = pre + "%";
                         divLeftLayout.style.height = "100%"
                         dataLayout.appendChild(divLeftLayout);
+
                         var tableNum = document.createElement("div");
                         tableNum.setAttribute("id", "table_number");
                         tableNum.innerHTML = "桌号";
+                        tableNum.style.paddingTop = padding;
+                        tableNum.style.paddingBottom = padding;
                         divLeftLayout.appendChild(tableNum);
+
                         var level = document.createElement("div");
                         level.setAttribute("id", "table_number");
                         level.innerHTML = "级别";
+                        level.style.paddingTop = padding;
+                        level.style.paddingBottom = padding;
                         divLeftLayout.appendChild(level);
+
                         var currency = document.createElement("div");
                         currency.setAttribute("id", "table_number");
                         currency.innerHTML = "货币";
+                        currency.style.paddingTop = padding;
+                        currency.style.paddingBottom = padding;
                         divLeftLayout.appendChild(currency);
+
                         var empty = document.createElement("div");
                         empty.setAttribute("id", "name");
                         divLeftLayout.appendChild(empty);
@@ -39,17 +55,23 @@ html
                     cellLayout.style.height = '100%'
                     var number = document.createElement("div");
                     number.setAttribute("id", "table_number");
-                    number.innerHTML = "NO" + (index + 1);
+                    number.innerHTML = "<div>NO" + (index + 1) + "</div>";
+                    number.style.paddingTop = padding;
+                    number.style.paddingBottom = padding;
                     cellLayout.appendChild(number);
 
                     var lv = document.createElement("div");
                     lv.setAttribute("id", "table_number");
                     lv.innerHTML = obj[0];
+                    lv.style.paddingTop = padding;
+                    lv.style.paddingBottom = padding;
                     cellLayout.appendChild(lv);
 
                     var _currency = document.createElement("div");
                     _currency.setAttribute("id", "table_number");
                     _currency.innerHTML = obj[1];
+                    _currency.style.paddingTop = padding;
+                    _currency.style.paddingBottom = padding;
                     cellLayout.appendChild(_currency);
 
                     var person = obj[2];
@@ -58,9 +80,12 @@ html
                     cellLayout.appendChild(name);
                     person.forEach(function (p) {
                         var personName = document.createElement("div");
+                        var padding = (totalHeight * 0.8 * 0.09 * 0.9 - 18) / 2 + 'px';
                         personName.innerHTML = p;
-                        personName.style.height = '9.5%'
+                        personName.style.fontSize = '18px'
                         personName.style.color = "#b7ff21";
+                        personName.style.paddingBottom = padding;
+                        personName.style.paddingTop = padding;
                         name.appendChild(personName);
                     });
 
