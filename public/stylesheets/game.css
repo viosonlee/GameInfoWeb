@@ -1,19 +1,17 @@
 #main_layout {
-    border: 1px solid #ffffff;
-    background-color: red;
     width: 100%;
 }
-
+body{
+    background-color: red;
+}
 #title_txt {
     font-size: 50px;
     color: white;
-
 }
 
 #title_layout {
     text-align: center;
-    border-bottom: 1px solid #ffffff;
-    border-right: 1px solid #ffffff;
+    border: 1px solid darkred;
 }
 
 #data_layout {
@@ -21,19 +19,36 @@
     height: 90%;
     justify-content: flex-start;
 }
-
-#table_number {
-    border-right: 1px solid white;
-    border-bottom: 1px solid white;
+#table_title_number {
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    border-bottom: 1px solid gray;
     color: white;
     font-size: 18px;
+    line-height: 20px;
     text-align: center;
 }
 
-#name {
-    border-right: 1px solid white;
-    border-bottom: 1px solid white;
+#table_number {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    color: white;
+    font-size: 18px;
+    line-height: 20px;
+    text-align: center;
+}
+#name_empty{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
     color: white;
     text-align: center;
-    height: 85%;
+    height: 82%;
+}
+#name {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    color: white;
+    text-align: center;
+    height: 82%;
 }

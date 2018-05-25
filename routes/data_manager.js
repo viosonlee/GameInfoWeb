@@ -16,7 +16,6 @@ router.get("/manager", function (req, res) {
 });
 
 
-
 router.get('/dataupdate', function (req, res) {
     var dataStr = req.query['data'];
     fs.exists("gameData.json", function (exists) {
